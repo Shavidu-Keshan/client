@@ -9,10 +9,11 @@ export default function MainPage() {
   const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(null);
   
   //handle submit method
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(
       date,
-      SourceCurrency,
+      sourceCurrency,
       targetCureency,
       amountInSourceCurrency
 
@@ -68,7 +69,7 @@ export default function MainPage() {
     type="number" id={amountInSourceCurrency} name={amountInSourceCurrency} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" 
     placeholder="Amount in source currency" required />
   </div>
-  <button type="button" className='bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md'>Get the target currency</button>
+  <button  className='bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md'>Get the target currency</button>
             
         </form>
 
