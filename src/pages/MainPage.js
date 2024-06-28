@@ -1,5 +1,5 @@
-import React ,{useState}from 'react'
-
+import React ,{useEffect, useState}from 'react'
+import axios from "axios";
 export default function MainPage() {
   // states for the four field
   const [date, setDate] = useState(null);
@@ -8,17 +8,32 @@ export default function MainPage() {
   const [amountInSourceCurrency, setAmountInSourceCurrency] = useState(null);
   const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(null);
   
+  
   //handle submit method
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
+    /*console.log(
       date,
       sourceCurrency,
       targetCureency,
       amountInSourceCurrency
 
-    )
+    )*/
   };
+
+  //get all curencies name
+  useEffect(() => {
+    const getCurrencyNames = async() => {
+      try{
+        const responce = await axios.get(
+          "http://Localhost:5000/getAllCurrencies"
+        )
+      } catch(err){
+        console.error(err)
+      }
+    }
+  }, [])
+
   return (
   <div>
     <h1 className="lg:mx-32 text-5xl font-bold text-green-500"> Convert Your Currencies Today</h1>
