@@ -7,18 +7,18 @@ export default function MainPage() {
   const [targetCureency, setTargetCurrency] = useState("");
   const [amountInSourceCurrency, setAmountInSourceCurrency] = useState(null);
   const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(null);
-  
+  const [currencyNames, setCurrencyNames] = useState([]);
   
   //handle submit method
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*console.log(
+    console.log(
       date,
       sourceCurrency,
       targetCureency,
       amountInSourceCurrency
 
-    )*/
+    )
   };
 
   //get all curencies name
@@ -27,11 +27,13 @@ export default function MainPage() {
       try{
         const responce = await axios.get(
           "http://Localhost:5000/getAllCurrencies"
-        )
+        );
+        setCurrencyNames(responce.data);
       } catch(err){
         console.error(err)
       }
-    }
+    };
+    getCurrencyNames();
   }, [])
 
   return (
@@ -62,7 +64,14 @@ export default function MainPage() {
     
 
     >
-      <option value="">Select Source currency</option>
+     <option value="">Select Target currency</option>
+                {Object.keys(currencyNames).map((currency) => (
+                  <option className="p-1" key={currency} value={currency}>
+                    {currencyNames[currency]}
+                  </option>
+                ))}
+
+
     </select>
   </div>
   <div className="mb-4">
@@ -75,6 +84,13 @@ export default function MainPage() {
     value={targetCureency}
     >
       <option value="">Select target currency</option>
+      <option value="">Select Target currency</option>
+                {Object.keys(currencyNames).map((currency) => (
+                  <option className='p-1' key={currency} value={currency}>
+                    {currencyNames[currency]}
+                  </option>
+                ))}
+    
     </select>
   </div>
   <div className="mb-4">
